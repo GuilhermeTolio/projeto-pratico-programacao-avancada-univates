@@ -1,0 +1,75 @@
+
+
+CREATE TABLE doacao (
+    id_doacao INT PRIMARY KEY,
+    tipo_doacao VARCHAR(25),
+    valor_doacao DECIMAL(18,2),
+    data_doacao DATE,
+    descricao_doacao TEXT,
+    pessoa_id_pessoa INT,
+    FOREIGN KEY (pessoa_id_pessoa) REFERENCES pessoa(id_pessoa)
+);
+
+CREATE TABLE pessoa (
+    id_pessoa INT PRIMARY KEY,
+    nome_pessoa VARCHAR(255),
+    cpf_cnpj VARCHAR(14),
+    telefone_pessoa CHAR(11),
+    email_pessoa TEXT,
+    tipo_pessoa VARCHAR(255),
+    historia_pessoa TEXT,
+    voluntario_pessoa BOOLEAN
+);
+
+CREATE TABLE adocoes (
+    id_adocao INT PRIMARY KEY,
+    data_adocao DATE,
+    tipo_adocao INT,
+    pessoa_id_pessoa INT,
+    animal_id_animal INT,
+    FOREIGN KEY (pessoa_id_pessoa) REFERENCES pessoa(id_pessoa),
+    FOREIGN KEY (animal_id_animal) REFERENCES animais(id_animal)
+);
+
+CREATE TABLE animais (
+    id_animal INT PRIMARY KEY,
+    nome_animal VARCHAR(255),
+    especie_animal VARCHAR(255),
+    raca_animal VARCHAR(255),
+    idade_animal INT,
+    estado_saude_animal VARCHAR(255),
+    historico_vacinas_animal TEXT,
+    data_resgate_animal DATE
+);
+
+
+INSERT INTO pessoa VALUES (1, 'Maria', '38760669055', '51987654321', 'maria@email.com', 'Doador', 'Doadora frequente desde 2020', FALSE);
+INSERT INTO pessoa VALUES (2, 'João', '86036467087', '51976543210', 'joao@email.com', 'Voluntário', 'Voluntário de fins de semana', TRUE);
+INSERT INTO pessoa VALUES (3, 'Ana', '07347608090', '51965432109', 'ana@email.com', 'Adotante', 'Primeira adoção em 2022', FALSE);
+INSERT INTO pessoa VALUES (4, 'Pedro', '69492095092', '51954321098', 'pedro@email.com', 'Voluntário', 'Especialista em cuidados com cães', TRUE);
+INSERT INTO pessoa VALUES (5, 'Mateus', '29431785005', '51943210987', 'mateus@email.com', 'Adotante/Doador', 'Adotou 2 animais e faz doações mensais', FALSE);
+INSERT INTO pessoa VALUES (6, 'Guilherme', '26072499023', '51932109876', 'guilherme@email.com', 'Voluntário', 'Voluntário especialista em felinos', TRUE);
+
+INSERT INTO doacao VALUES (1, 'Financeira', 100.00, '2023-01-15', 'Doação mensal', 1);
+INSERT INTO doacao VALUES (2, 'Ração', 200.00, '2023-02-20', '10kg de ração premium', 3);
+INSERT INTO doacao VALUES (3, 'Financeira', 500.00, '2023-03-10', 'Doação para tratamentos veterinários', 5);
+INSERT INTO doacao VALUES (4, 'Medicamentos', 150.00, '2023-04-05', 'Antibióticos e anti-inflamatórios', 1);
+INSERT INTO doacao VALUES (5, 'Produtos de Limpeza', 80.00, '2023-05-12', 'Material para limpeza do abrigo', 5);
+
+INSERT INTO animais VALUES (1, 'Rex', 'Canino', 'Labrador', 3, 'Saudável', 'Vacinas em dia: V8, V10, Antirrábica', '2021-06-10');
+INSERT INTO animais VALUES (2, 'Luna', 'Felino', 'Siamês', 2, 'Em tratamento', 'Vacina tríplice, tratamento para otite', '2022-03-22');
+INSERT INTO animais VALUES (3, 'Thor', 'Canino', 'Pit Bull', 5, 'Saudável', 'Vacinas em dia, castrado', '2020-11-15');
+INSERT INTO animais VALUES (4, 'Nina', 'Felino', 'SRD', 1, 'Saudável', 'Vacinas em dia, castrada', '2023-01-30');
+INSERT INTO animais VALUES (5, 'Bob', 'Canino', 'Golden Retriever', 7, 'Tratamento crônico', 'Vacinas em dia, problema articular', '2019-08-05');
+
+INSERT INTO adocoes VALUES (1, '2025-02-15', 1, 3, 4);
+INSERT INTO adocoes VALUES (2, '2025-02-21', 2, 5, 1);
+INSERT INTO adocoes VALUES (3, '2024-08-23', 1, 1, 2);
+INSERT INTO adocoes VALUES (4, '2025-03-08', 1, 5, 3);
+INSERT INTO adocoes VALUES (5, '2024-10-12', 2, 3, 5);
+
+SELECT * FROM pessoa;
+SELECT * FROM adocoes;
+SELECT * FROM animais;
+SELECT * FROM doacoes;
+
